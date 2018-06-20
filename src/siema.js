@@ -102,9 +102,9 @@ export default class Siema {
       };
 
       // Touch events
-      this.selector.addEventListener('touchstart', this.touchstartHandler);
+      this.selector.addEventListener('touchstart', this.touchstartHandler, { passive: true });
       this.selector.addEventListener('touchend', this.touchendHandler);
-      this.selector.addEventListener('touchmove', this.touchmoveHandler);
+      this.selector.addEventListener('touchmove', this.touchmoveHandler, { passive: true });
 
       // Mouse events
       this.selector.addEventListener('mousedown', this.mousedownHandler);
@@ -197,6 +197,8 @@ export default class Siema {
     this.selector.innerHTML = '';
     this.selector.appendChild(this.sliderFrame);
 
+    // Our addArrow function should insert arrows!
+    // this.addArrows(this.sliderFrame);
     // Go to currently active slide after initial build
     this.slideToCurrent();
   }
@@ -209,7 +211,6 @@ export default class Siema {
     elementContainer.appendChild(elm);
     return elementContainer;
   }
-
 
   /**
    * Determinates slides number accordingly to clients viewport.
@@ -227,7 +228,6 @@ export default class Siema {
       }
     }
   }
-
 
   /**
    * Go to previous slide.
@@ -641,7 +641,7 @@ export default class Siema {
 
 
   /**
-   * Prepernd item to carousel.
+   * Prepend item to carousel.
    * @param {HTMLElement} item - Item to prepend.
    * @param {function} callback - Optional callback to call after prepend.
    */
